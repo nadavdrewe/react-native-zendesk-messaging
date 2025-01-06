@@ -130,7 +130,7 @@ class ZendeskMessaging: RCTEventEmitter {
   func openMessagingView(
     resolver resolve: @escaping RCTPromiseResolveBlock,
     rejecter reject: @escaping RCTPromiseRejectBlock
-  ) -> Void {
+  ) -> Void {å
     if !initialized {
       reject(nil, "Zendesk instance not initialized", nil)
       return
@@ -143,26 +143,6 @@ class ZendeskMessaging: RCTEventEmitter {
         return
       }
       rootController.show(viewController, sender: self)
-      resolve(nil)
-    }
-  }
-
-  @objc(closeMessagingView:rejecter:)
-  func closeMessagingView(
-    resolver resolve: @escaping RCTPromiseResolveBlock,
-    rejecter reject: @escaping RCTPromiseRejectBlock
-  ) -> Void {
-    if !initialized {
-      reject(nil, "Zendesk instance not initialized", nil)
-      return
-    }
-
-    DispatchQueue.main.async {
-      guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
-        reject(nil, "cannot close messaging view", nil)
-        return
-      }
-      rootViewController.dismiss(animated: true, completion: nil)
       resolve(nil)
     }
   }
